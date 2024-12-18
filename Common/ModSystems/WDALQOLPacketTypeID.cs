@@ -16,30 +16,17 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using System.IO;
-using log4net;
-using Terraria.ModLoader;
-using WeDoALittleQualityOfLife.Common.ModSystems;
+using System;
 
-namespace WeDoALittleQualityOfLife
+namespace WeDoALittleQualityOfLife.Common.ModSystems
 {
-    public class WeDoALittleQualityOfLife : Mod
+    internal static class WDALQOLPacketTypeID
     {
-        public static ILog logger;
-        public static Mod instance;
-        internal static WDALQOLNetworkingSystem networkingSystem = new WDALQOLNetworkingSystem();
-
-        public override void HandlePacket(BinaryReader reader, int whoAmI)
-        {
-            networkingSystem.HandlePacket(reader, whoAmI, this);
-            base.HandlePacket(reader, whoAmI);
-        }
-
-        public override void Load()
-        {
-            logger = this.Logger;
-            instance = this;
-            base.Load();
-        }
+        public const short moondial                  = 0;
+        public const short sundial                   = 1;
+        public const short weatherVane               = 2;
+        public const short djinnLamp                 = 3;
+        public const short skyMill                   = 4;
+        public const short updateWindSpeedTarget     = 5;
     }
 }
