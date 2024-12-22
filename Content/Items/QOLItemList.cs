@@ -72,6 +72,35 @@ namespace WeDoALittleQualityOfLife.Content.Items
             return base.ConsumeItem(item, player);
         }
 
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if (item.type == ItemID.Moondial)
+            {
+                List<TooltipLine> infoLine = tooltips.FindAll(t => (t.Name == "Tooltip0") && (t.Mod == "Terraria"));
+                infoLine.ForEach(t => t.Text = "Allows time to fast forward to dusk");
+            }
+            if (item.type == ItemID.Sundial)
+            {
+                List<TooltipLine> infoLine = tooltips.FindAll(t => (t.Name == "Tooltip0") && (t.Mod == "Terraria"));
+                infoLine.ForEach(t => t.Text = "Allows time to fast forward to dawn");
+            }
+            if (item.type == ItemID.WeatherVane)
+            {
+                TooltipLine tileFunctionLine = new TooltipLine(Mod, "TileFunctionDescription", "Allows rain to start, intesify and stop");
+                tooltips.Add(tileFunctionLine);
+            }
+            if (item.type == ItemID.SkyMill)
+            {
+                TooltipLine tileFunctionLine = new TooltipLine(Mod, "TileFunctionDescription", "Allows wind to start, intesify, change direction and stop");
+                tooltips.Add(tileFunctionLine);
+            }
+            if (item.type == ItemID.DjinnLamp)
+            {
+                TooltipLine tileFunctionLine = new TooltipLine(Mod, "TileFunctionDescription", "Allows sandstorms to start and stop");
+                tooltips.Add(tileFunctionLine);
+            }
+        }
+
         public override void SetDefaults(Item item)
         {
             // Make boss summoning items non-consumable
