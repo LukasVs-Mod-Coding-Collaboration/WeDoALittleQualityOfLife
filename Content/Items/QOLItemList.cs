@@ -157,5 +157,16 @@ namespace WeDoALittleQualityOfLife.Content.Items
                 }
             }
         }
+
+        public override bool ReforgePrice(Item item, ref int reforgePrice, ref bool canApplyDiscount)
+        {
+            canApplyDiscount = false;
+            reforgePrice = Item.buyPrice(silver: 50);
+            if (Main.hardMode)
+            {
+                reforgePrice *= 2;
+            }
+            return false;
+        }
     }
 }
