@@ -33,10 +33,12 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
     internal class WDALQOLPlayerUtil : ModPlayer
     {
         public Player player;
+        public int timeSinceRespawn = 0;
         
         public override void Initialize()
         {
             player = this.Player;
+            timeSinceRespawn = 0;
         }
 
         public static bool IsBossActive()
@@ -62,11 +64,22 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
 
         public override void OnRespawn()
         {
-            if(!IsBossActive())
+            timeSinceRespawn = 1;
+            base.OnRespawn();
+        }
+
+        public override void UpdateLifeRegen()
+        {
+            if (timeSinceRespawn > 10)
             {
+                timeSinceRespawn = 0;
                 player.Heal(999999);
             }
-            base.OnRespawn();
+            else if (timeSinceRespawn > 0)
+            {
+                timeSinceRespawn++;
+            }
+            base.UpdateLifeRegen();
         }
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
