@@ -248,6 +248,12 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             .AddIngredient(ItemID.PlatinumBar, 12)
             .Register();
 
+            Recipe.Create(ItemID.MagicQuiver, 1)
+            .AddTile(TileID.WorkBenches)
+            .AddIngredient(ItemID.EndlessQuiver, 1)
+            .AddIngredient(ItemID.CrystalShard, 100)
+            .Register();
+
             Recipe WDALT_CobaltShield_V1 = Recipe.Create(ItemID.CobaltShield, 1);
             WDALT_CobaltShield_V1.AddTile(TileID.MythrilAnvil);
             WDALT_CobaltShield_V1.AddIngredient(ItemID.CobaltBar, 8);
