@@ -1331,33 +1331,8 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
                 {
                     if (recipe.TryGetIngredient(ItemID.ChlorophyteOre, out Item ChlorophyteOre))
                     {
-                        ChlorophyteOre.stack = 3;
+                        ChlorophyteOre.stack = 4;
                     }
-                }
-
-                //Chlorophyte Bullet
-
-                if (recipe.TryGetResult(ItemID.ChlorophyteBullet, out Item ChlorophyteBullet))
-                {
-                    if (recipe.TryGetIngredient(ItemID.MusketBall, out Item MusketBall))
-                    {
-                        MusketBall.stack = 150;
-                    }
-                    ChlorophyteBullet.stack = 150;
-                }
-
-                //Spooky Armor
-                if (recipe.TryGetResult(ItemID.SpookyHelmet, out Item SpookyHelmet))
-                {
-                    recipe.AddIngredient(ItemID.ChlorophyteBar, 12);
-                }
-                if (recipe.TryGetResult(ItemID.SpookyBreastplate, out Item SpookyBreastplate))
-                {
-                    recipe.AddIngredient(ItemID.ChlorophyteBar, 18);
-                }
-                if (recipe.TryGetResult(ItemID.SpookyLeggings, out Item SpookyLeggings))
-                {
-                    recipe.AddIngredient(ItemID.ChlorophyteBar, 15);
                 }
             }
         }
