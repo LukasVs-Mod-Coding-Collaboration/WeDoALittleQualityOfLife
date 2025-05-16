@@ -101,6 +101,27 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             .AddTile(TileID.TinkerersWorkbench)
             .Register();
 
+            Recipe.Create(ItemID.Aglet, 1)
+            .AddIngredient(ItemID.GoldBar, 8)
+            .AddIngredient(ItemID.IronBar, 4)
+            .AddIngredient(ItemID.Chain, 2)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+            Recipe.Create(ItemID.AnkletoftheWind, 1)
+            .AddIngredient(ItemID.JungleSpores, 8)
+            .AddIngredient(ItemID.Vine, 4)
+            .AddIngredient(ItemID.Chain, 2)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
+            Recipe.Create(ItemID.FeralClaws, 1)
+            .AddIngredient(ItemID.JungleSpores, 8)
+            .AddIngredient(ItemID.Stinger, 8)
+            .AddIngredient(ItemID.Chain, 2)
+            .AddTile(TileID.TinkerersWorkbench)
+            .Register();
+
             Recipe.Create(ItemID.CrimsonSeeds, 1)
             .AddIngredient(ItemID.CorruptSeeds, 1)
             .AddCondition(ShimmerCondition)
