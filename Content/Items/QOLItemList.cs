@@ -120,7 +120,8 @@ namespace WeDoALittleQualityOfLife.Content.Items
                 item.type == ItemID.PumpkinMoonMedallion ||
                 item.type == ItemID.NaughtyPresent ||
                 item.type == ItemID.GoblinBattleStandard ||
-                item.type == ItemID.PirateMap
+                item.type == ItemID.PirateMap ||
+                item.type == ItemID.BloodMoonStarter
             )
             {
                 item.consumable = false;
