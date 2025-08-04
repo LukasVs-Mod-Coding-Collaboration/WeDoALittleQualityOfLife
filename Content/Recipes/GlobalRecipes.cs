@@ -138,6 +138,11 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             .AddTile(TileID.Hellforge)
             .Register();
 
+            Recipe.Create(ItemID.StonePlatform, 1)
+            .AddIngredient(ItemID.StoneBlock, 1)
+            .AddTile(TileID.Furnaces)
+            .Register();
+
             Recipe.Create(ItemID.JungleGrassSeeds, 5)
             .AddIngredient(ItemID.GrassSeeds, 5)
             .AddIngredient(ItemID.JungleSpores, 1)
