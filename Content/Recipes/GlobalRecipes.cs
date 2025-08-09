@@ -194,6 +194,42 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             .AddCondition(ShimmerCondition)
             .Register();
 
+            Recipe.Create(ItemID.AmethystStaff, 1)
+            .AddIngredient(ItemID.TinBar, 10)
+            .AddIngredient(ItemID.Amethyst, 8)
+            .AddTile(TileID.Anvils)
+            .Register();
+
+            Recipe.Create(ItemID.TopazStaff, 1)
+            .AddIngredient(ItemID.CopperBar, 10)
+            .AddIngredient(ItemID.Topaz, 8)
+            .AddTile(TileID.Anvils)
+            .Register();
+
+            Recipe.Create(ItemID.SapphireStaff, 1)
+            .AddIngredient(ItemID.TungstenBar, 10)
+            .AddIngredient(ItemID.Sapphire, 8)
+            .AddTile(TileID.Anvils)
+            .Register();
+
+            Recipe.Create(ItemID.EmeraldStaff, 1)
+            .AddIngredient(ItemID.SilverBar, 10)
+            .AddIngredient(ItemID.Emerald, 8)
+            .AddTile(TileID.Anvils)
+            .Register();
+
+            Recipe.Create(ItemID.RubyStaff, 1)
+            .AddIngredient(ItemID.PlatinumBar, 10)
+            .AddIngredient(ItemID.Ruby, 8)
+            .AddTile(TileID.Anvils)
+            .Register();
+
+            Recipe.Create(ItemID.DiamondStaff, 1)
+            .AddIngredient(ItemID.GoldBar, 10)
+            .AddIngredient(ItemID.Diamond, 8)
+            .AddTile(TileID.Anvils)
+            .Register();
+
             Recipe WDALT_WormScarf_BoC_V1 = Recipe.Create(ItemID.WormScarf, 1);
             WDALT_WormScarf_BoC_V1.AddCondition(ShimmerCondition);
             WDALT_WormScarf_BoC_V1.AddIngredient(ItemID.BrainOfConfusion, 1);
