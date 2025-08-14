@@ -110,16 +110,19 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                         {
                             Main.maxRaining = 0.4f;
                             SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                            Main.player[Main.myPlayer].chatOverhead.NewMessage("Rain", 120);
                         }
                         else if (Main.maxRaining < 0.6f)
                         {
                             Main.maxRaining = 0.8f;
                             SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                            Main.player[Main.myPlayer].chatOverhead.NewMessage("Heavy Rain", 120);
                         }
                         else if (!Main.dontStarveWorld)
                         {
                             Main.StopRain();
                             SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                            Main.player[Main.myPlayer].chatOverhead.NewMessage("No Rain", 120);
                         }
                     }
                     else
@@ -127,6 +130,7 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                         Main.StartRain();
                         Main.maxRaining = 0.1f;
                         SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Light Rain", 120);
                     }
                 }
                 else if (Main.netMode == NetmodeID.MultiplayerClient)
@@ -135,6 +139,25 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                     weatherVanePacket.Write(WDALQOLPacketTypeID.weatherVane);
                     weatherVanePacket.Send();
                     SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                    if (Main.IsItRaining)
+                    {
+                        if (Main.maxRaining < 0.2f)
+                        {
+                            Main.player[Main.myPlayer].chatOverhead.NewMessage("Rain", 120);
+                        }
+                        else if (Main.maxRaining < 0.6f)
+                        {
+                            Main.player[Main.myPlayer].chatOverhead.NewMessage("Heavy Rain", 120);
+                        }
+                        else if (!Main.dontStarveWorld)
+                        {
+                            Main.player[Main.myPlayer].chatOverhead.NewMessage("No Rain", 120);
+                        }
+                    }
+                    else
+                    {
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Light Rain", 120);
+                    }
                 }
             }
             else if (type == TileID.DjinnLamp)
@@ -155,6 +178,7 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                     {
                         Sandstorm.StopSandstorm();
                         SoundEngine.PlaySound(SoundID.Item20, new Vector2(i * 16, j * 16));
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Stopped Sandstorm", 120);
                     }
                     else
                     {
@@ -172,6 +196,7 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                             }
                         }
                         SoundEngine.PlaySound(SoundID.Item20, new Vector2(i * 16, j * 16));
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Started Sandstorm", 120);
                     }
                 }
                 else if (Main.netMode == NetmodeID.MultiplayerClient)
@@ -180,6 +205,14 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                     djinnLampPacket.Write(WDALQOLPacketTypeID.djinnLamp);
                     djinnLampPacket.Send();
                     SoundEngine.PlaySound(SoundID.Item20, new Vector2(i * 16, j * 16));
+                    if (Sandstorm.Happening)
+                    {
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Stopped Sandstorm", 120);
+                    }
+                    else
+                    {
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Started Sandstorm", 120);
+                    }
                 }
             }
             else if (type == TileID.SkyMill)
@@ -200,11 +233,13 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                     {
                         Main.windSpeedTarget += windSign * windSpeedPerMph * 10.0f;
                         SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Wind Speed: " + Math.Abs((int)Math.Round(Main.windSpeedTarget * (1f / windSpeedPerMph))) + " mph " + (Main.windSpeedTarget < 0 ? "(East)" : "(West)"), 120);
                     }
                     else if (Math.Abs(Main.windSpeedTarget) >= windSpeedPerMph * 39.0f)
                     {
                         Main.windSpeedTarget = (-windSign) * windSpeedPerMph * 5.0f;
                         SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Wind Speed: " + Math.Abs((int)Math.Round(Main.windSpeedTarget * (1f / windSpeedPerMph))) + " mph " + (Main.windSpeedTarget < 0 ? "(East)" : "(West)"), 120);
                     }
                 }
                 else if (Main.netMode == NetmodeID.MultiplayerClient)
@@ -213,6 +248,24 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                     skyMillPacket.Write(WDALQOLPacketTypeID.skyMill);
                     skyMillPacket.Send();
                     SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
+                    float windSpeedPerMph = ((1.0f) / (50.0f));
+                    float windSign = 1.0f;
+                    if (Main.windSpeedTarget >= 0)
+                    {
+                        windSign = 1;
+                    }
+                    else
+                    {
+                        windSign = -1;
+                    }
+                    if (Math.Abs(Main.windSpeedTarget) < windSpeedPerMph * 39.0f)
+                    {
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Wind Speed: " + Math.Abs((int)Math.Round(Main.windSpeedTarget * (1f / windSpeedPerMph) + windSign * 10.0f)) + " mph " + (Main.windSpeedTarget < 0 ? "(East)" : "(West)"), 120);
+                    }
+                    else if (Math.Abs(Main.windSpeedTarget) >= windSpeedPerMph * 39.0f)
+                    {
+                        Main.player[Main.myPlayer].chatOverhead.NewMessage("Wind Speed: " + Math.Abs((int)Math.Round((-windSign) * 5.0f)) + " mph " + (Main.windSpeedTarget < 0 ? "(West)" : "(East)"), 120);
+                    }
                 }
             }
             base.RightClick(i, j, type);
