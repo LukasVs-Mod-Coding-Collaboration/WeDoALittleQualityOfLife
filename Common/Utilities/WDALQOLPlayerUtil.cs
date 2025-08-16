@@ -91,6 +91,15 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
             base.Kill(damage, hitDirection, pvp, damageSource);
         }
 
+        public override void UpdateDead()
+        {
+            if (player.dead && !IsBossActive() && player.respawnTimer > 180)
+            {
+                player.respawnTimer = 180;
+            }
+            base.UpdateDead();
+        }
+
         public override void UpdateEquips()
         {
             player.arcticDivingGear = true;
