@@ -23,6 +23,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using WeDoALittleQualityOfLife.Common.Utilities;
 using System.Linq;
+using WeDoALittleQualityOfLife.Common.Configs;
 
 namespace WeDoALittleQualityOfLife.Content.Recipes
 {
@@ -30,6 +31,10 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
     {
         public static void AddRecipes()
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableExtraRecipes)
+            {
+                return;
+            }
             AddComplexCraftingTreeItemDuplicationRecipes();
             AddShimmeringBetweenMimicItems_MeleeWeapons();
             AddShimmeringBetweenMimicItems_RangedWeapons();
@@ -873,6 +878,10 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
 
         public static void PostAddRecipes()
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableExtraRecipes)
+            {
+                return;
+            }
             for (int i = 0; i < Recipe.numRecipes; i++)
             {
                 Recipe recipe = Main.recipe[i];
@@ -894,7 +903,7 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
                         BottledWater1.stack = 3;
                     }
                 }
-                
+
                 //Platinum Armor
 
                 if (recipe.TryGetResult(ItemID.PlatinumHelmet, out Item PlatinumHelmet))

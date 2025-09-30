@@ -1,0 +1,71 @@
+Mods: {
+	WeDoALittleQualityOfLife: {
+		Configs: {
+			WDALQOLServerConfig: {
+				DisplayName: Server Configuration
+
+				Headers: {
+					World: World
+					Player: Player
+					Recipes: Recipes
+					Economy: Economy
+				}
+
+				DisableEvilBiomeSpreadPrevention: {
+					Label: Disable Evil Biome Spread Prevention
+					Tooltip: Re-enables evil biome spread.
+				}
+
+				DisableDyePlantGrowthSpeedup: {
+					Label: Disable Dye Plant Growth Speedup
+					Tooltip: Disables accelerated dye plant growth.
+				}
+
+				DisableNPCArrivalSpeedup: {
+					Label: Disable Town NPC Arrival Speedup
+					Tooltip: Disables accelerated arrival of town NPCs.
+				}
+
+				DisableForTheWorthyDarknessDefuser: {
+					Label: Disable For The Worthy Darkness Defuser
+					Tooltip: Re-enables darkness in the jungle temple and during the golem boss fight in "For The Worthy" worlds.
+				}
+
+				DisableUtilityTiles: {
+					Label: Disable Buff Tile Use In Inventory
+					Tooltip: Disables making buff tiles usable from the player's inventory.
+				}
+
+				DisableRespawnSpeedup: {
+					Label: Disable Respawn Speedup
+					Tooltip: Disables respawning in 3 seconds while no boss is active.
+				}
+
+				DisableRespawnWithFullHealth: {
+					Label: Disable Respawn On Full Health
+					Tooltip: Disables respawning on full health.
+				}
+
+				DisableIceBiomeWaterNoSlowness: {
+					Label: Disable Ice Biome Water Without Slowness
+					Tooltip: Re-enables water in the ice biome giving players without arctic diving gear the "Chilled" debuff.
+				}
+
+				DisableExtraRecipes: {
+					Label: Disable Extra Recipes
+					Tooltip: Disables the mod's extra crafting recipes.
+				}
+
+				DisableCustomReforgePrices: {
+					Label: Disable Custom Reforge Prices
+					Tooltip: Disables reforging costing a fixed 15 / 20 / 25 / 50 / 100 / 200 / 400 Silver at various progression stages.
+				}
+
+				DisableInfiniteBossSummoningItems: {
+					Label: Disable Infinite Boss Summoning Items
+					Tooltip: Disables boss summoning items being infinitely re-usable.
+				}
+			}
+		}
+	}
+}

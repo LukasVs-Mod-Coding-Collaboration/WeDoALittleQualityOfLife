@@ -26,6 +26,7 @@ using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using WeDoALittleQualityOfLife.Common.Configs;
 using WeDoALittleQualityOfLife.Common.ModSystems;
 
 namespace WeDoALittleQualityOfLife.Content.Tiles
@@ -44,6 +45,11 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
 
         public override void PlaceInWorld(int i, int j, int type, Item item)
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableUtilityTiles)
+            {
+                base.PlaceInWorld(i, j, type, item);
+                return;
+            }
             if (BuffTilesItemIDs.Contains(item.type))
             {
                 ReduceStack(item);
@@ -67,6 +73,11 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
 
         public override void RightClick(int i, int j, int type)
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableUtilityTiles)
+            {
+                base.RightClick(i, j, type);
+                return;
+            }
             if (type == TileID.Moondial)
             {
                 if (Main.netMode == NetmodeID.SinglePlayer)

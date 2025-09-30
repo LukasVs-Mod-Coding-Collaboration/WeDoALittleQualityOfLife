@@ -27,6 +27,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using WeDoALittleQualityOfLife.Common.Configs;
 
 namespace WeDoALittleQualityOfLife.Common.Utilities
 {
@@ -64,6 +65,11 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
 
         public override void OnRespawn()
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableRespawnWithFullHealth)
+            {
+                base.OnRespawn();
+                return;
+            }
             timeSinceRespawn = 1;
             base.OnRespawn();
         }
@@ -84,6 +90,11 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableRespawnSpeedup)
+            {
+                base.Kill(damage, hitDirection, pvp, damageSource);
+                return;
+            }
             if(!IsBossActive())
             {
                 player.respawnTimer = 180;
@@ -93,6 +104,11 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
 
         public override void UpdateDead()
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableRespawnSpeedup)
+            {
+                base.UpdateDead();
+                return;
+            }
             if (player.dead && !IsBossActive() && player.respawnTimer > 180)
             {
                 player.respawnTimer = 180;
@@ -102,6 +118,11 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
 
         public override void UpdateEquips()
         {
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableIceBiomeWaterNoSlowness)
+            {
+                base.UpdateEquips();
+                return;
+            }
             player.arcticDivingGear = true;
             base.UpdateEquips();
         }
