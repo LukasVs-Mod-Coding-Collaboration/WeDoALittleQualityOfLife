@@ -16,12 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.UI;
 using WeDoALittleQualityOfLife.Content.Recipes;
 
 namespace WeDoALittleQualityOfLife.Common.ModSystems

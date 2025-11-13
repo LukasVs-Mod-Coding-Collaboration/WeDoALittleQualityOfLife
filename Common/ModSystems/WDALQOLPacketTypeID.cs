@@ -16,8 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using System;
-
 namespace WeDoALittleQualityOfLife.Common.ModSystems
 {
     internal static class WDALQOLPacketTypeID

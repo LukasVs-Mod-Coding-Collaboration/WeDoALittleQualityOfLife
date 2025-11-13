@@ -22,9 +22,7 @@ using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using Microsoft.Xna.Framework;
 using Terraria.Audio;
-using Terraria.GameContent.Prefixes;
 using WeDoALittleQualityOfLife.Content.Tiles;
 using WeDoALittleQualityOfLife.Common.Configs;
 

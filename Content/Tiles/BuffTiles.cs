@@ -21,11 +21,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
 using WeDoALittleQualityOfLife.Common.Configs;
 using WeDoALittleQualityOfLife.Common.ModSystems;
 

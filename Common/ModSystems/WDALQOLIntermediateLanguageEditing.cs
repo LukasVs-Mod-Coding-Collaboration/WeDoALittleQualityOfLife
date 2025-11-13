@@ -20,9 +20,6 @@ using Terraria;
 using Terraria.ModLoader;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
-using System;
-using WeDoALittleQualityOfLife;
-using Terraria.ID;
 using WeDoALittleQualityOfLife.Common.Configs;
 
 namespace WeDoALittleQualityOfLife.Common.ModSystems

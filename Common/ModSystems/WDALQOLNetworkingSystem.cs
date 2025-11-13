@@ -19,9 +19,7 @@
 using System;
 using System.IO;
 using Terraria;
-using Terraria.Audio;
 using Terraria.GameContent.Events;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
