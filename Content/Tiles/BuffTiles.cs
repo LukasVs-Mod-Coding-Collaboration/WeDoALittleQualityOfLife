@@ -65,7 +65,6 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
             {
                 item.type = ItemID.None;
                 item.stack = 0;
-                item.active = false;
             }
         }
 

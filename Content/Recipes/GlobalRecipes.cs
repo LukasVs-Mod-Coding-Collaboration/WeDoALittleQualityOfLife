@@ -271,7 +271,7 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             Recipe.Create(ItemID.LandMine, 10)
             .AddTile(TileID.HeavyWorkBench)
             .AddIngredient(ItemID.ExplosivePowder, 5)
-            .AddRecipeGroup(RecipeGroupID.IronBar, 3)
+            .AddRecipeGroup(RecipeGroups.IronBar, 3)
             .AddIngredient(ItemID.RedPressurePlate, 1)
             .Register();
 
@@ -402,7 +402,7 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             Recipe WDALT_SlimeStaff = Recipe.Create(ItemID.SlimeStaff, 1);
             WDALT_SlimeStaff.AddTile(TileID.WorkBenches);
             WDALT_SlimeStaff.AddIngredient(ItemID.Gel, 99);
-            WDALT_SlimeStaff.AddRecipeGroup(RecipeGroupID.Wood, 33);
+            WDALT_SlimeStaff.AddRecipeGroup(RecipeGroups.Wood, 33);
             WDALT_SlimeStaff.Register();
         }
 

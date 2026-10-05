@@ -172,37 +172,37 @@ namespace WeDoALittleQualityOfLife.Content.Items
             }
         }
 
-        public override bool ReforgePrice(Item item, ref int reforgePrice, ref bool canApplyDiscount)
+        public override bool ReforgePrice(Item item, ref long reforgePrice, ref bool canApplyDiscount)
         {
             if (ModContent.GetInstance<WDALQOLServerConfig>().DisableCustomReforgePrices)
             {
                 return base.ReforgePrice(item, ref reforgePrice, ref canApplyDiscount);
             }
             canApplyDiscount = false;
-            reforgePrice = Item.buyPrice(silver: 15);
+            reforgePrice = (long)Item.buyPrice(silver: 15);
             if (NPC.downedBoss1)
             {
-                reforgePrice = Item.buyPrice(silver: 20);
+                reforgePrice = (long)Item.buyPrice(silver: 20);
             }
             if (NPC.downedBoss2)
             {
-                reforgePrice = Item.buyPrice(silver: 25);
+                reforgePrice = (long)Item.buyPrice(silver: 25);
             }
             if (NPC.downedBoss3 || Main.hardMode)
             {
-                reforgePrice *= 2;
+                reforgePrice *= 2L;
             }
             if (Main.hardMode)
             {
-                reforgePrice *= 2;
+                reforgePrice *= 2L;
             }
             if (NPC.downedPlantBoss)
             {
-                reforgePrice *= 2;
+                reforgePrice *= 2L;
             }
             if (NPC.downedMoonlord)
             {
-                reforgePrice *= 2;
+                reforgePrice *= 2L;
             }
             return false;
         }
