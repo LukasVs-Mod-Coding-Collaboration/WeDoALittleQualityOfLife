@@ -29,7 +29,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
         public static void RegisterILHooks()
         {
             IL_WorldGen.UpdateWorld_Inner += IL_WorldGen_UpdateWorld;
-            IL_Player.UpdateBiomes += IL_Player_UpdateBiomes;
+            IL_SceneState.UpdateLightDecay += IL_SceneState_UpdateLightDecay;
             IL_Main.UpdateTime_SpawnTownNPCs += IL_Main_UpdateTime_SpawnTownNPCs;
             IL_WorldGen.UpdateWorld_OvergroundTile += IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile += IL_WorldGen_UpdateWorld_UndergroundTile;
@@ -38,13 +38,13 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
         public static void UnregisterILHooks()
         {
             IL_WorldGen.UpdateWorld_Inner -= IL_WorldGen_UpdateWorld;
-            IL_Player.UpdateBiomes -= IL_Player_UpdateBiomes;
+            IL_SceneState.UpdateLightDecay -= IL_SceneState_UpdateLightDecay;
             IL_Main.UpdateTime_SpawnTownNPCs -= IL_Main_UpdateTime_SpawnTownNPCs;
             IL_WorldGen.UpdateWorld_OvergroundTile -= IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile -= IL_WorldGen_UpdateWorld_UndergroundTile;
         }
 
-        public static void IL_WorldGen_UpdateWorld(ILContext intermediateLanguageContext)
+        public static void IL_WorldGen_UpdateWorld(ILContext intermediateLanguageContext) /* [SKIPPED] TAPI_1.4.5.8: NEEDS VERIFICATION */
         {
             bool successInjectInfectionSpreadHook = true;
             if (ModContent.GetInstance<WDALQOLServerConfig>().DisableEvilBiomeSpreadPrevention)
@@ -76,7 +76,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             }
         }
 
-        public static void IL_Player_UpdateBiomes(ILContext intermediateLanguageContext)
+        public static void IL_SceneState_UpdateLightDecay(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
         {
             bool successInjectGetGoodWorldLightingHook = true;
             if (ModContent.GetInstance<WDALQOLServerConfig>().DisableForTheWorthyDarknessDefuser)
@@ -104,7 +104,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             }
         }
 
-        public static void IL_Main_UpdateTime_SpawnTownNPCs(ILContext intermediateLanguageContext)
+        public static void IL_Main_UpdateTime_SpawnTownNPCs(ILContext intermediateLanguageContext) /* [SKIPPED] TAPI_1.4.5.8: NEEDS VERIFICATION */
         {
             bool successInjectTownNPCsRespawnTimeHook = true;
             if (ModContent.GetInstance<WDALQOLServerConfig>().DisableNPCArrivalSpeedup)
@@ -132,7 +132,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             }
         }
 
-        public static void IL_WorldGen_UpdateWorld_OvergroundTile(ILContext intermediateLanguageContext)
+        public static void IL_WorldGen_UpdateWorld_OvergroundTile(ILContext intermediateLanguageContext) /* [SKIPPED] TAPI_1.4.5.8: NEEDS VERIFICATION */
         {
             bool successInjectPlantOvergroundHook = true;
             if (ModContent.GetInstance<WDALQOLServerConfig>().DisableDyePlantGrowthSpeedup)
@@ -168,7 +168,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             }
         }
 
-        public static void IL_WorldGen_UpdateWorld_UndergroundTile(ILContext intermediateLanguageContext)
+        public static void IL_WorldGen_UpdateWorld_UndergroundTile(ILContext intermediateLanguageContext) /* [SKIPPED] TAPI_1.4.5.8: NEEDS VERIFICATION */
         {
             bool successInjectPlantUndergroundHook = true;
             if (ModContent.GetInstance<WDALQOLServerConfig>().DisableDyePlantGrowthSpeedup)
