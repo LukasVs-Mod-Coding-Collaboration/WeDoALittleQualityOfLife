@@ -40,6 +40,8 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
         {
             player = this.Player;
             timeSinceRespawn = 0;
+            //Terraria 1.4.5.8 has a bug where chatOverhead.color is NULL when a player object is initialized, explicitly initialize it so we can use chatOverhead right away.
+            player.chatOverhead.color = Color.White;
         }
 
         public static bool IsBossActive()
