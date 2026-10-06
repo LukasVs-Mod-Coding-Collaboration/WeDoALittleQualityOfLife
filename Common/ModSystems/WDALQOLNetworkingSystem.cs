@@ -63,7 +63,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
                 }
                 if(type == WDALQOLPacketTypeID.weatherVane)
                 {
-                    if (Main.IsItRaining)
+                    if (Main.raining)
                     {
                         if (Main.maxRaining < 0.2f)
                         {

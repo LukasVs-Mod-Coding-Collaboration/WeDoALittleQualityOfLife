@@ -112,7 +112,7 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
             {
                 if (Main.netMode == NetmodeID.SinglePlayer)
                 {
-                    if (Main.IsItRaining)
+                    if (Main.raining)
                     {
                         if (Main.maxRaining < 0.2f)
                         {
@@ -147,7 +147,7 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                     weatherVanePacket.Write(WDALQOLPacketTypeID.weatherVane);
                     weatherVanePacket.Send();
                     SoundEngine.PlaySound(SoundID.Item4, new Vector2(i * 16, j * 16));
-                    if (Main.IsItRaining)
+                    if (Main.raining)
                     {
                         if (Main.maxRaining < 0.2f)
                         {
