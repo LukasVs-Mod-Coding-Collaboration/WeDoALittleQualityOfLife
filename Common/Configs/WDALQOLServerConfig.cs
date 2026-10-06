@@ -16,9 +16,9 @@ namespace WeDoALittleQualityOfLife.Common.Configs
         [DefaultValue(false)]
         [ReloadRequired]
         public bool DisableDyePlantGrowthSpeedup;
-        [DefaultValue(false)]
-        [ReloadRequired]
-        public bool DisableNPCArrivalSpeedup;
+        //[DefaultValue(false)]
+        //[ReloadRequired]
+        //public bool DisableNPCArrivalSpeedup;
         [DefaultValue(false)]
         [ReloadRequired]
         public bool DisableForTheWorthyDarknessDefuser;

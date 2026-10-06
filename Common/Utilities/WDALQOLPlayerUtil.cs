@@ -97,7 +97,8 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
                 base.Kill(damage, hitDirection, pvp, damageSource);
                 return;
             }
-            if(!IsBossActive())
+            bool canSkipRespawn = player.AllowsRespawnTimerSkip();
+            if(canSkipRespawn)
             {
                 player.respawnTimer = 180;
             }
@@ -111,7 +112,8 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
                 base.UpdateDead();
                 return;
             }
-            if (player.dead && !IsBossActive() && player.respawnTimer > 180)
+            bool canSkipRespawn = player.AllowsRespawnTimerSkip();
+            if (canSkipRespawn && player.respawnTimer > 180)
             {
                 player.respawnTimer = 180;
             }
