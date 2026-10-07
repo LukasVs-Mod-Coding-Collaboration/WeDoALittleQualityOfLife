@@ -62,6 +62,9 @@ namespace WeDoALittleQualityOfLife.Content.Items
                     case ItemID.SliceOfCake:
                         buffActivateSoundStyle = SoundID.Item2;
                         break;
+                    case ItemID.DeadCellsPotionStation:
+                        buffActivateSoundStyle = SoundID.Item179;
+                        break;
                     default:
                         playSound = false;
                         break;
@@ -159,6 +162,9 @@ namespace WeDoALittleQualityOfLife.Content.Items
                             break;
                         case ItemID.AmmoBox:
                             item.buffType = BuffID.AmmoBox;
+                            break;
+                        case ItemID.DeadCellsPotionStation:
+                            item.buffType = BuffID.DeadCellsPotionStation;
                             break;
                         case ItemID.SliceOfCake:
                             item.buffType = BuffID.SugarRush;

@@ -38,7 +38,8 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
             ItemID.SharpeningStation,
             ItemID.CrystalBall,
             ItemID.AmmoBox,
-            ItemID.SliceOfCake
+            ItemID.SliceOfCake,
+            ItemID.DeadCellsPotionStation
         };
 
         public override void PlaceInWorld(int i, int j, int type, Item item)
