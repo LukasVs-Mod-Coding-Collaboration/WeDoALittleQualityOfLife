@@ -193,15 +193,7 @@ namespace WeDoALittleQualityOfLife.Content.Tiles
                         Sandstorm.StartSandstorm();
                         if (Math.Abs(Main.windSpeedTarget) < windSpeedPerMph * 30.0f)
                         {
-                            if (Main.windSpeedTarget > 0)
-                            {
-                                Main.windSpeedTarget = windSign * windSpeedPerMph * 35.0f;
-
-                            }
-                            else
-                            {
-                                Main.windSpeedTarget = windSign * windSpeedPerMph * 35.0f;
-                            }
+                            Main.windSpeedTarget = windSign * windSpeedPerMph * 35.0f;
                         }
                         SoundEngine.PlaySound(SoundID.Item20, new Vector2(i * 16, j * 16));
                         Main.player[Main.myPlayer].chatOverhead.NewMessage("Started Sandstorm", 120);
