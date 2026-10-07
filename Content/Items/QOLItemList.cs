@@ -184,7 +184,7 @@ namespace WeDoALittleQualityOfLife.Content.Items
             {
                 return base.ReforgePrice(item, ref reforgePrice, ref canApplyDiscount);
             }
-            canApplyDiscount = true;
+            canApplyDiscount = false;
             reforgePrice = (long)Item.buyPrice(silver: 50);
             if (Main.hardMode)
             {
