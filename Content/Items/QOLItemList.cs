@@ -184,20 +184,8 @@ namespace WeDoALittleQualityOfLife.Content.Items
             {
                 return base.ReforgePrice(item, ref reforgePrice, ref canApplyDiscount);
             }
-            canApplyDiscount = false;
-            reforgePrice = (long)Item.buyPrice(silver: 15);
-            if (NPC.downedBoss1)
-            {
-                reforgePrice = (long)Item.buyPrice(silver: 20);
-            }
-            if (NPC.downedBoss2)
-            {
-                reforgePrice = (long)Item.buyPrice(silver: 25);
-            }
-            if (NPC.downedBoss3 || Main.hardMode)
-            {
-                reforgePrice *= 2L;
-            }
+            canApplyDiscount = true;
+            reforgePrice = (long)Item.buyPrice(silver: 50);
             if (Main.hardMode)
             {
                 reforgePrice *= 2L;
