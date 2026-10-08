@@ -190,10 +190,6 @@ namespace WeDoALittleQualityOfLife.Content.Items
             {
                 reforgePrice *= 2L;
             }
-            if (NPC.downedPlantBoss)
-            {
-                reforgePrice *= 2L;
-            }
             if (NPC.downedMoonlord)
             {
                 reforgePrice *= 2L;
