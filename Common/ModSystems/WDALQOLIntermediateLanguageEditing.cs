@@ -41,7 +41,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
         {
             IL_WorldGen.UpdateWorld_Inner += IL_WorldGen_UpdateWorld;
             IL_SceneState.UpdateLightDecay += IL_SceneState_UpdateLightDecay;
-            //IL_Main.UpdateTime_SpawnTownNPCs += IL_Main_UpdateTime_SpawnTownNPCs;
+            IL_Main.UpdateTime_SpawnTownNPCs += IL_Main_UpdateTime_SpawnTownNPCs;
             IL_WorldGen.UpdateWorld_OvergroundTile += IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile += IL_WorldGen_UpdateWorld_UndergroundTile;
             IL_WorldGen.SpawnFallingObjects += IL_WorldGen_SpawnFallingObjects;
@@ -51,7 +51,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
         {
             IL_WorldGen.UpdateWorld_Inner -= IL_WorldGen_UpdateWorld;
             IL_SceneState.UpdateLightDecay -= IL_SceneState_UpdateLightDecay;
-            //IL_Main.UpdateTime_SpawnTownNPCs -= IL_Main_UpdateTime_SpawnTownNPCs;
+            IL_Main.UpdateTime_SpawnTownNPCs -= IL_Main_UpdateTime_SpawnTownNPCs;
             IL_WorldGen.UpdateWorld_OvergroundTile -= IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile -= IL_WorldGen_UpdateWorld_UndergroundTile;
             IL_WorldGen.SpawnFallingObjects -= IL_WorldGen_SpawnFallingObjects;
@@ -117,8 +117,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             }
         }
 
-        /*
-        public static void IL_Main_UpdateTime_SpawnTownNPCs(ILContext intermediateLanguageContext) // [SKIPPED] TAPI_1.4.5.8: DEPRECATED
+        public static void IL_Main_UpdateTime_SpawnTownNPCs(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
         {
             bool successInjectTownNPCsRespawnTimeHook = true;
             if (ModContent.GetInstance<WDALQOLServerConfig>().DisableNPCArrivalSpeedup)
@@ -145,7 +144,6 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
                 WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected Town NPCs Respawn Time Hook via IL Editing.");
             }
         }
-        */
 
         public static void IL_WorldGen_UpdateWorld_OvergroundTile(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
         {
