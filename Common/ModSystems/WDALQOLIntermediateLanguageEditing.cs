@@ -21,6 +21,7 @@ using Terraria.ModLoader;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using WeDoALittleQualityOfLife.Common.Configs;
+using Terraria.ID;
 
 namespace _System_
 {
@@ -45,6 +46,9 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             IL_WorldGen.UpdateWorld_OvergroundTile += IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile += IL_WorldGen_UpdateWorld_UndergroundTile;
             IL_WorldGen.SpawnFallingObjects += IL_WorldGen_SpawnFallingObjects;
+            IL_Projectile.Kill_ExplodeTiles += IL_Projectile_Kill_ExplodeTiles;
+            IL_NPC.AI_045_Golem += IL_NPC_AI_045_Golem;
+            IL_NPC.AI_047_GolemFist += IL_NPC_AI_047_GolemFist;
         }
 
         public static void UnregisterILHooks()
@@ -55,6 +59,9 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             IL_WorldGen.UpdateWorld_OvergroundTile -= IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile -= IL_WorldGen_UpdateWorld_UndergroundTile;
             IL_WorldGen.SpawnFallingObjects -= IL_WorldGen_SpawnFallingObjects;
+            IL_Projectile.Kill_ExplodeTiles -= IL_Projectile_Kill_ExplodeTiles;
+            IL_NPC.AI_045_Golem -= IL_NPC_AI_045_Golem;
+            IL_NPC.AI_047_GolemFist -= IL_NPC_AI_047_GolemFist;
         }
 
         public static void IL_WorldGen_UpdateWorld(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
@@ -246,6 +253,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             {
                 try
                 {
+                    WeDoALittleQualityOfLife.logger.Info("Note: The following exception a joke exception and it occuring doesn't affect your game whatsoever.");
                     throw new _System_.WillWillWillWillException("NOOOOOOO, you can't just disable boulder rain!");
                 }
                 catch
@@ -253,6 +261,92 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
                     WeDoALittleQualityOfLife.logger.Fatal("Uh oh, looks like Re-Logic didn't get their way.");
                 }
                 WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected Object Rain Hook via IL Editing.");
+            }
+        }
+
+        public static void IL_Projectile_Kill_ExplodeTiles(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
+        {
+            bool successInjectGetGoodWorldGriefingHook1 = true;
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableForTheWorthyBossGriefingDefuser)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: For The Worthy Griefing Hook [1/3] is disabled in the server configuration, skipping injection...");
+                return;
+            }
+            try
+            {
+                ILCursor cursor = new ILCursor(intermediateLanguageContext);
+                cursor.GotoNext(i => i.MatchLdsfld<Main>(nameof(Main.getGoodWorld))); //First Main.getGoodWorld call: Skeletron Prime Griefing
+                cursor.Index++; //move cursor to the "Main.getGoodWorld" if statement.
+                cursor.Emit(OpCodes.Pop); //Pop the value of Main.getGoodWorld off the stack.
+                cursor.Emit(OpCodes.Ldc_I4_0); //Push "false" onto the stack. This causes the if statement to never run the code inside.
+            }
+            catch
+            {
+                MonoModHooks.DumpIL(ModContent.GetInstance<WeDoALittleQualityOfLife>(), intermediateLanguageContext);
+                WeDoALittleQualityOfLife.logger.Fatal("WDALT: Failed to inject For The Worthy Griefing Hook [1/3]. Broken IL Code has been dumped to tModLoader-Logs/ILDumps/WeDoALittleQualityOfLife.");
+                successInjectGetGoodWorldGriefingHook1 = false;
+            }
+            if(successInjectGetGoodWorldGriefingHook1)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected For The Worthy Griefing Hook [1/3] via IL Editing.");
+            }
+        }
+
+        public static void IL_NPC_AI_045_Golem(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
+        {
+            bool successInjectGetGoodWorldGriefingHook2 = true;
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableForTheWorthyBossGriefingDefuser)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: For The Worthy Griefing Hook [2/3] is disabled in the server configuration, skipping injection...");
+                return;
+            }
+            try
+            {
+                ILCursor cursor = new ILCursor(intermediateLanguageContext);
+                cursor.GotoNext(i => i.MatchLdsfld(typeof(TileID.Sets).GetField(nameof(TileID.Sets.Torches)))); //First TileID.Sets.Torches call: Golem Body Griefing
+                cursor.GotoNext(i => i.MatchLdelemU1()); //Go to the intruction where the actual boolen value of TileID.Sets.Torches[tile.type] is pushed onto the stack.
+                cursor.Index++; //Now go behind the instruction.
+                cursor.Emit(OpCodes.Pop); //Pop the value of TileID.Sets.Torches[tile.type] off the stack.
+                cursor.Emit(OpCodes.Ldc_I4_0); //Push "false" onto the stack. This causes the if statement to never run the code inside.*/
+            }
+            catch
+            {
+                MonoModHooks.DumpIL(ModContent.GetInstance<WeDoALittleQualityOfLife>(), intermediateLanguageContext);
+                WeDoALittleQualityOfLife.logger.Fatal("WDALT: Failed to inject For The Worthy Griefing Hook [2/3]. Broken IL Code has been dumped to tModLoader-Logs/ILDumps/WeDoALittleQualityOfLife.");
+                successInjectGetGoodWorldGriefingHook2 = false;
+            }
+            if(successInjectGetGoodWorldGriefingHook2)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected For The Worthy Griefing Hook [2/3] via IL Editing.");
+            }
+        }
+
+        public static void IL_NPC_AI_047_GolemFist(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
+        {
+            bool successInjectGetGoodWorldGriefingHook3 = true;
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableForTheWorthyBossGriefingDefuser)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: For The Worthy Griefing Hook [3/3] is disabled in the server configuration, skipping injection...");
+                return;
+            }
+            try
+            {
+                ILCursor cursor = new ILCursor(intermediateLanguageContext);
+                cursor.GotoNext(i => i.MatchLdsfld(typeof(TileID.Sets).GetField(nameof(TileID.Sets.Torches)))); //First TileID.Sets.Torches call: Golem Fist Griefing
+                cursor.GotoNext(i => i.MatchLdelemU1()); //Go to the intruction where the actual boolen value of TileID.Sets.Torches[tile.type] is pushed onto the stack.
+                cursor.Index++; //Now go behind the instruction.
+                cursor.Emit(OpCodes.Pop); //Pop the value of TileID.Sets.Torches[tile.type] off the stack.
+                cursor.Emit(OpCodes.Ldc_I4_0); //Push "false" onto the stack. This causes the if statement to never run the code inside.*/
+            }
+            catch
+            {
+                MonoModHooks.DumpIL(ModContent.GetInstance<WeDoALittleQualityOfLife>(), intermediateLanguageContext);
+                WeDoALittleQualityOfLife.logger.Fatal("WDALT: Failed to inject For The Worthy Griefing Hook [3/3]. Broken IL Code has been dumped to tModLoader-Logs/ILDumps/WeDoALittleQualityOfLife.");
+                successInjectGetGoodWorldGriefingHook3 = false;
+            }
+            if(successInjectGetGoodWorldGriefingHook3)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected For The Worthy Griefing Hook [3/3] via IL Editing.");
             }
         }
     }

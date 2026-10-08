@@ -58,7 +58,7 @@ Mods: {
 
 				DisableCustomReforgePrices: {
 					Label: Disable Custom Reforge Prices
-					Tooltip: Disables reforging costing a fixed 15 / 20 / 25 / 50 / 100 / 200 / 400 Silver at various progression stages.
+					Tooltip: Disables reforging costing a fixed 50 / 100 / 200 Silver at various progression stages.
 				}
 
 				DisableInfiniteBossSummoningItems: {
@@ -68,7 +68,12 @@ Mods: {
 
 				DisableBoulderAndMeteorRainDefuser: {
 					Label: Disable Boulder And Meteor Rain Defuser
-					Tooltip: ""
+					Tooltip: Re-enables boulder rain and meteor rain in "For The Worthy" / "Drunk" / "The Constant" seed combo worlds.
+				}
+
+				DisableForTheWorthyBossGriefingDefuser: {
+					Label: Disable For The Worthy Boss Griefing Defuser
+					Tooltip: Re-enables bosses destroying tiles in "For The Worthy" worlds.
 				}
 			}
 		}
