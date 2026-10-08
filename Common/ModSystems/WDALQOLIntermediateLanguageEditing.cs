@@ -22,6 +22,17 @@ using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using WeDoALittleQualityOfLife.Common.Configs;
 
+namespace _System_
+{
+    class WillWillWillWillException : System.Exception // Note: This is a joke exception and it occuring doesn't affect your game whatsoever.
+    {
+        public WillWillWillWillException(string reason) : base(reason)
+        {
+
+        }
+    }
+}
+
 namespace WeDoALittleQualityOfLife.Common.ModSystems
 {
     internal static class WDALQOLIntermediateLanguageEditing
@@ -33,6 +44,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             //IL_Main.UpdateTime_SpawnTownNPCs += IL_Main_UpdateTime_SpawnTownNPCs;
             IL_WorldGen.UpdateWorld_OvergroundTile += IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile += IL_WorldGen_UpdateWorld_UndergroundTile;
+            IL_WorldGen.SpawnFallingObjects += IL_WorldGen_SpawnFallingObjects;
         }
 
         public static void UnregisterILHooks()
@@ -42,6 +54,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             //IL_Main.UpdateTime_SpawnTownNPCs -= IL_Main_UpdateTime_SpawnTownNPCs;
             IL_WorldGen.UpdateWorld_OvergroundTile -= IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile -= IL_WorldGen_UpdateWorld_UndergroundTile;
+            IL_WorldGen.SpawnFallingObjects -= IL_WorldGen_SpawnFallingObjects;
         }
 
         public static void IL_WorldGen_UpdateWorld(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
@@ -201,6 +214,47 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             if(successInjectPlantUndergroundHook)
             {
                 WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected Strange Plant Underground Hook via IL Editing.");
+            }
+        }
+
+        public static void IL_WorldGen_SpawnFallingObjects(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
+        {
+            bool successInjectObjectRainHook = true;
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisableBoulderAndMeteorRainDefuser)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: Object Rain Hook is disabled in the server configuration, skipping injection...");
+                return;
+            }
+            try
+            {
+                ILCursor cursor = new ILCursor(intermediateLanguageContext);
+                cursor.GotoNext(i => i.MatchLdsfld<Main>(nameof(Main.getGoodWorld))); //First Main.getGoodWorld call: Boulder Rain Code
+                cursor.Index++; //move cursor to the "Main.getGoodWorld" if statement.
+                cursor.Emit(OpCodes.Pop); //Pop the value of Main.getGoodWorld off the stack.
+                cursor.Emit(OpCodes.Ldc_I4_0); //Push "false" onto the stack. This causes the if statement to never run the code inside.
+                cursor.Index++; //move cursor after the previous statement.
+                cursor.GotoNext(i => i.MatchLdsfld<Main>(nameof(Main.getGoodWorld))); //Second Main.getGoodWorld call: Meteor Rain Code
+                cursor.Index++; //move cursor to the "Main.getGoodWorld" if statement.
+                cursor.Emit(OpCodes.Pop); //Pop the value of Main.getGoodWorld off the stack.
+                cursor.Emit(OpCodes.Ldc_I4_0); //Push "false" onto the stack. This causes the if statement to never run the code inside.
+            }
+            catch
+            {
+                MonoModHooks.DumpIL(ModContent.GetInstance<WeDoALittleQualityOfLife>(), intermediateLanguageContext);
+                WeDoALittleQualityOfLife.logger.Fatal("WDALT: Failed to inject Object Rain Hook. Broken IL Code has been dumped to tModLoader-Logs/ILDumps/WeDoALittleQualityOfLife.");
+                successInjectObjectRainHook = false;
+            }
+            if(successInjectObjectRainHook)
+            {
+                try
+                {
+                    throw new _System_.WillWillWillWillException("NOOOOOOO, you can't just disable boulder rain!");
+                }
+                catch
+                {
+                    WeDoALittleQualityOfLife.logger.Fatal("Uh oh, looks like Re-Logic didn't get their way.");
+                }
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected Object Rain Hook via IL Editing.");
             }
         }
     }

@@ -65,6 +65,11 @@ Mods: {
 					Label: Disable Infinite Boss Summoning Items
 					Tooltip: Disables boss summoning items being infinitely re-usable.
 				}
+
+				DisableBoulderAndMeteorRainDefuser: {
+					Label: Disable Boulder And Meteor Rain Defuser
+					Tooltip: ""
+				}
 			}
 		}
 	}

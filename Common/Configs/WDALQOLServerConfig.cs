@@ -24,6 +24,9 @@ namespace WeDoALittleQualityOfLife.Common.Configs
         public bool DisableForTheWorthyDarknessDefuser;
         [DefaultValue(false)]
         [ReloadRequired]
+        public bool DisableBoulderAndMeteorRainDefuser;
+        [DefaultValue(false)]
+        [ReloadRequired]
         public bool DisableUtilityTiles;
 
         [Header("Player")]
