@@ -46,6 +46,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             IL_WorldGen.UpdateWorld_OvergroundTile += IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile += IL_WorldGen_UpdateWorld_UndergroundTile;
             IL_WorldGen.SpawnFallingObjects += IL_WorldGen_SpawnFallingObjects;
+            IL_WorldGen.placeTrap += IL_WorldGen_placeTrap;
             IL_Projectile.Kill_ExplodeTiles += IL_Projectile_Kill_ExplodeTiles;
             IL_NPC.AI_045_Golem += IL_NPC_AI_045_Golem;
             IL_NPC.AI_047_GolemFist += IL_NPC_AI_047_GolemFist;
@@ -59,6 +60,7 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             IL_WorldGen.UpdateWorld_OvergroundTile -= IL_WorldGen_UpdateWorld_OvergroundTile;
             IL_WorldGen.UpdateWorld_UndergroundTile -= IL_WorldGen_UpdateWorld_UndergroundTile;
             IL_WorldGen.SpawnFallingObjects -= IL_WorldGen_SpawnFallingObjects;
+            IL_WorldGen.placeTrap -= IL_WorldGen_placeTrap;
             IL_Projectile.Kill_ExplodeTiles -= IL_Projectile_Kill_ExplodeTiles;
             IL_NPC.AI_045_Golem -= IL_NPC_AI_045_Golem;
             IL_NPC.AI_047_GolemFist -= IL_NPC_AI_047_GolemFist;
@@ -347,6 +349,34 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
             if(successInjectGetGoodWorldGriefingHook3)
             {
                 WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected For The Worthy Griefing Hook [3/3] via IL Editing.");
+            }
+        }
+
+        public static void IL_WorldGen_placeTrap(ILContext intermediateLanguageContext) /* [OK] TAPI_1.4.5.8: VERIFIED */
+        {
+            bool successInjectPooBoulderHook = true;
+            if (ModContent.GetInstance<WDALQOLServerConfig>().DisablePooDefuser)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: Poo Boulder Hook is disabled in the server configuration, skipping injection...");
+                return;
+            }
+            try
+            {
+                ILCursor cursor = new ILCursor(intermediateLanguageContext);
+                cursor.GotoNext(i => i.MatchLdcI4(TileID.Poulder)); //Go to the intruction where the Poo Boulder TileID is set.
+                cursor.Index++; //Now go behind the instruction.
+                cursor.Emit(OpCodes.Pop); //Pop TileID of Poo Boulder off the stack.
+                cursor.Emit(OpCodes.Ldc_I4, TileID.Boulder); //Push TileID.Boulder onto the stack. This causes the statement to place a normal boulder instead.*/
+            }
+            catch
+            {
+                MonoModHooks.DumpIL(ModContent.GetInstance<WeDoALittleQualityOfLife>(), intermediateLanguageContext);
+                WeDoALittleQualityOfLife.logger.Fatal("WDALT: Failed to inject Poo Boulder Hook. Broken IL Code has been dumped to tModLoader-Logs/ILDumps/WeDoALittleQualityOfLife.");
+                successInjectPooBoulderHook = false;
+            }
+            if(successInjectPooBoulderHook)
+            {
+                WeDoALittleQualityOfLife.logger.Debug("WDALT: Successfully injected Poo Boulder Hook via IL Editing.");
             }
         }
     }

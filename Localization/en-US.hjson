@@ -78,7 +78,12 @@ Mods: {
 
 				DisableRespawnSpeedupNoBossActive: {
 					Label: Disable Skippable Respawn Timer Without Active Boss
-					Tooltip: Disable making the respawn timer skippable when no boss is active.
+					Tooltip: Disables making the respawn timer skippable when no boss is active.
+				}
+
+				DisablePooDefuser: {
+					Label: Disable Poo Defuser
+					Tooltip: Disables replacing all Poo Boulders with regular Boulders during world generation as well as preventing poo from being placed.
 				}
 			}
 		}

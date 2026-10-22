@@ -196,5 +196,24 @@ namespace WeDoALittleQualityOfLife.Content.Items
             }
             return false;
         }
+
+        public override bool CanUseItem(Item item, Player player)
+        {
+            // Anti-Poo-Block-Mechanism
+            if
+            (
+                !ModContent.GetInstance<WDALQOLServerConfig>().DisablePooDefuser &&
+                (
+                    item.type == ItemID.PoopBlock ||
+                    item.type == ItemID.PoopWall ||
+                    item.type == ItemID.Poulder
+                )
+            )
+            {
+                player.chatOverhead.NewMessage(player.name + " tried to uglify the world.", 180);
+                return false;
+            }
+            return base.CanUseItem(item, player);
+        }
     }
 }

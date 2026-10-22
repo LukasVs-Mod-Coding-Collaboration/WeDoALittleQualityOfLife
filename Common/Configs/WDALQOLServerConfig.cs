@@ -18,6 +18,9 @@ namespace WeDoALittleQualityOfLife.Common.Configs
         public bool DisableDyePlantGrowthSpeedup;
         [DefaultValue(false)]
         [ReloadRequired]
+        public bool DisablePooDefuser;
+        [DefaultValue(false)]
+        [ReloadRequired]
         public bool DisableNPCArrivalSpeedup;
         [DefaultValue(false)]
         [ReloadRequired]
