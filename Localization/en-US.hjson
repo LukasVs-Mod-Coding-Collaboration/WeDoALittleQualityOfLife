@@ -75,6 +75,11 @@ Mods: {
 					Label: Disable For The Worthy Boss Griefing Defuser
 					Tooltip: Re-enables bosses destroying tiles in "For The Worthy" worlds.
 				}
+
+				DisableRespawnSpeedupNoBossActive: {
+					Label: Disable Skippable Respawn Timer Without Active Boss
+					Tooltip: Disable making the respawn timer skippable when no boss is active.
+				}
 			}
 		}
 	}

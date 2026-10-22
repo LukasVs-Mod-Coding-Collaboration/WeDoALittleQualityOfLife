@@ -43,6 +43,9 @@ namespace WeDoALittleQualityOfLife.Common.Configs
         [DefaultValue(false)]
         [ReloadRequired]
         public bool DisableIceBiomeWaterNoSlowness;
+        [DefaultValue(false)]
+        [ReloadRequired]
+        public bool DisableRespawnSpeedupNoBossActive;
 
         [Header("Recipes")]
 

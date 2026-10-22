@@ -44,6 +44,54 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
             player.chatOverhead.color = Color.White;
         }
 
+        public static void RegisterHooks()
+        {
+            On_Player.AllowsRespawnTimerSkip += On_Player_AllowsRespawnTimerSkip;
+        }
+
+        public static void UnregisterHooks()
+        {
+            On_Player.AllowsRespawnTimerSkip -= On_Player_AllowsRespawnTimerSkip;
+        }
+
+        private static bool Terraria_AnyBossHindersRespawnTime(Player player)
+        {
+            for (int i = 0; i < Main.npc.Length; i++)
+            {
+                NPC npc = Main.npc[i];
+                if
+                (
+                    npc != null &&
+                    npc.active &&
+                    npc.type != NPCID.MartianSaucerCore &&
+                    (
+                        npc.boss ||
+                        npc.type == NPCID.EaterofWorldsHead ||
+                        npc.type == NPCID.EaterofWorldsBody ||
+                        npc.type == NPCID.EaterofWorldsTail
+                    ) &&
+                    (
+                        Math.Abs(player.Center.X - npc.Center.X) + Math.Abs(player.Center.Y - npc.Center.Y) < 4000f ||
+                        npc.interactedWithPlayerLocally
+                    )
+                )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool On_Player_AllowsRespawnTimerSkip(Terraria.On_Player.orig_AllowsRespawnTimerSkip orig, Terraria.Player self)
+        {
+            bool ret = orig.Invoke(self);
+            if (!ModContent.GetInstance<WDALQOLServerConfig>().DisableRespawnSpeedupNoBossActive)
+            {
+                ret = !Terraria_AnyBossHindersRespawnTime(self);
+            }
+            return ret;
+        }
+
         public static bool IsBossActive()
         {
             for(int i = 0;i < Main.npc.Length; i++)

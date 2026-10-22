@@ -17,6 +17,7 @@
 */
 
 using Terraria.ModLoader;
+using WeDoALittleQualityOfLife.Common.Utilities;
 using WeDoALittleQualityOfLife.Content.Recipes;
 
 namespace WeDoALittleQualityOfLife.Common.ModSystems
@@ -26,12 +27,14 @@ namespace WeDoALittleQualityOfLife.Common.ModSystems
         public override void OnModLoad()
         {
             WDALQOLIntermediateLanguageEditing.RegisterILHooks();
+            WDALQOLPlayerUtil.RegisterHooks();
             base.OnModLoad();
         }
 
         public override void OnModUnload()
         {
             WDALQOLIntermediateLanguageEditing.UnregisterILHooks();
+            WDALQOLPlayerUtil.UnregisterHooks();
             base.OnModUnload();
         }
         
