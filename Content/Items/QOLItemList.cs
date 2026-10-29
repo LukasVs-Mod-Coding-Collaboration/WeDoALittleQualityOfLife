@@ -137,7 +137,6 @@ namespace WeDoALittleQualityOfLife.Content.Items
                 )
                 {
                     item.consumable = false;
-                    item.maxStack = 1;
                 }
             }
             if (!ModContent.GetInstance<WDALQOLServerConfig>().DisableUtilityTiles)
