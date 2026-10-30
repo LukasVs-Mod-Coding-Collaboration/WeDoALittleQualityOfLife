@@ -17,17 +17,13 @@
 */
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Linq;
 using Terraria;
-using Terraria.Utilities;
-using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using WeDoALittleQualityOfLife.Common.Configs;
+using System.Collections.Generic;
 
 namespace WeDoALittleQualityOfLife.Common.Utilities
 {
@@ -35,6 +31,20 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
     {
         public Player player;
         public int timeSinceRespawn = 0;
+
+        public static readonly int[] availableBuffTileBuffs =
+        {
+            BuffID.WarTable,
+            BuffID.Bewitched,
+            BuffID.Sharpened,
+            BuffID.Clairvoyance,
+            BuffID.AmmoBox,
+            BuffID.DeadCellsPotionStation,
+            BuffID.SugarRush
+        };
+
+        public List<int> buffTileBuffs = new List<int>();
+        public int remainingSugarRushTime = 0;
         
         public override void Initialize()
         {
@@ -47,11 +57,33 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
         public static void RegisterHooks()
         {
             On_Player.AllowsRespawnTimerSkip += On_Player_AllowsRespawnTimerSkip;
+            On_Player.KillMe += On_Player_KillMe;
+            On_Player.Spawn += On_Player_Spawn;
         }
 
         public static void UnregisterHooks()
         {
             On_Player.AllowsRespawnTimerSkip -= On_Player_AllowsRespawnTimerSkip;
+            On_Player.KillMe -= On_Player_KillMe;
+            On_Player.Spawn -= On_Player_Spawn;
+        }
+
+        public static void On_Player_KillMe(Terraria.On_Player.orig_KillMe orig, Terraria.Player self, Terraria.DataStructures.PlayerDeathReason damageSource, double dmg, int hitDirection, bool pvp)
+        {
+            if (!ModContent.GetInstance<WDALQOLServerConfig>().DisableUtilityTiles && self.TryGetModPlayer<WDALQOLPlayerUtil>(out WDALQOLPlayerUtil util))
+            {
+                util.CollectBuffTileBuffs();
+            }
+            orig.Invoke(self, damageSource, dmg, hitDirection, pvp);
+        }
+
+        public static void On_Player_Spawn(Terraria.On_Player.orig_Spawn orig, Terraria.Player self, Terraria.PlayerSpawnContext context)
+        {
+            if (!ModContent.GetInstance<WDALQOLServerConfig>().DisableUtilityTiles && self.TryGetModPlayer<WDALQOLPlayerUtil>(out WDALQOLPlayerUtil util))
+            {
+                util.RestoreBuffTileBuffs();
+            }
+            orig.Invoke(self, context);
         }
 
         internal static bool Terraria_AnyBossHindersRespawnTime(Player player)
@@ -90,6 +122,51 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
                 ret = !Terraria_AnyBossHindersRespawnTime(self);
             }
             return ret;
+        }
+
+        public void ClearBuffTileBuffs()
+        {
+            buffTileBuffs.Clear();
+            remainingSugarRushTime = 0;
+        }
+
+        public void CollectBuffTileBuffs()
+        {
+            ClearBuffTileBuffs();
+            for (int i = 0; i < availableBuffTileBuffs.Length; i++)
+            {
+                if (player.HasBuff(availableBuffTileBuffs[i]))
+                {
+                    buffTileBuffs.Add(availableBuffTileBuffs[i]);
+                    if (availableBuffTileBuffs[i] == BuffID.SugarRush)
+                    {
+                        int idx = player.FindBuffIndex(availableBuffTileBuffs[i]);
+                        if (idx >= 0 && idx < player.buffTime.Length)
+                        {
+                            remainingSugarRushTime = player.buffTime[idx];
+                        }
+                    }
+                }
+            }
+        }
+
+        public void RestoreBuffTileBuffs()
+        {
+            foreach (int buffID in buffTileBuffs)
+            {
+                if(!player.HasBuff(buffID))
+                {
+                    if (buffID == BuffID.SugarRush)
+                    {
+                        player.AddBuff(buffID, remainingSugarRushTime);
+                    }
+                    else
+                    {
+                        player.AddBuff(buffID, 108000);
+                    }
+                }
+            }
+            ClearBuffTileBuffs();
         }
 
         public static bool IsBossActive()
