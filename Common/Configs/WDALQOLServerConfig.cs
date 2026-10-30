@@ -34,6 +34,9 @@ namespace WeDoALittleQualityOfLife.Common.Configs
         [DefaultValue(false)]
         [ReloadRequired]
         public bool DisableUtilityTiles;
+        [DefaultValue(false)]
+        [ReloadRequired]
+        public bool DisableEnemySpawningPreventionDuringBosses;
 
         [Header("Player")]
 

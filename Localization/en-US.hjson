@@ -85,6 +85,11 @@ Mods: {
 					Label: Disable Poo Defuser
 					Tooltip: Disables replacing all Poo Boulders with regular Boulders during world generation as well as preventing poo from being placed.
 				}
+
+				DisableEnemySpawningPreventionDuringBosses: {
+					Label: Disable Enemy Spawning Prevention During Bosses
+					Tooltip: Re-enables natural enemy spawning during boss fights.
+				}
 			}
 		}
 	}

@@ -54,7 +54,7 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
             On_Player.AllowsRespawnTimerSkip -= On_Player_AllowsRespawnTimerSkip;
         }
 
-        private static bool Terraria_AnyBossHindersRespawnTime(Player player)
+        internal static bool Terraria_AnyBossHindersRespawnTime(Player player)
         {
             for (int i = 0; i < Main.npc.Length; i++)
             {
