@@ -117,7 +117,7 @@ namespace WeDoALittleQualityOfLife.Common.Utilities
         public static bool On_Player_AllowsRespawnTimerSkip(Terraria.On_Player.orig_AllowsRespawnTimerSkip orig, Terraria.Player self)
         {
             bool ret = orig.Invoke(self);
-            if (!ModContent.GetInstance<WDALQOLServerConfig>().DisableRespawnSpeedupNoBossActive)
+            if (!ModContent.GetInstance<WDALQOLServerConfig>().DisableRespawnSpeedupNoBossActive && self.deadTime >= Terraria.Player.DeadSkipLockoutTime)
             {
                 ret = !Terraria_AnyBossHindersRespawnTime(self);
             }
