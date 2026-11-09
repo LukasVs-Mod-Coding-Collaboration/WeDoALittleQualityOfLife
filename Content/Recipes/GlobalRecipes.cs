@@ -235,6 +235,13 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             .AddTile(TileID.Anvils)
             .Register();
 
+            Recipe.Create(ItemID.LifeFruit, 1)
+            .AddIngredient(ItemID.TurtleShell, 2)
+            .AddIngredient(ItemID.LifeCrystal, 1)
+            .AddTile(TileID.ShimmerMonolith)
+            .AddCondition(Condition.DownedMechBossAny)
+            .Register();
+
             Recipe WDALT_WormScarf_BoC_V1 = Recipe.Create(ItemID.WormScarf, 1);
             WDALT_WormScarf_BoC_V1.AddCondition(ShimmerCondition);
             WDALT_WormScarf_BoC_V1.AddIngredient(ItemID.BrainOfConfusion, 1);
