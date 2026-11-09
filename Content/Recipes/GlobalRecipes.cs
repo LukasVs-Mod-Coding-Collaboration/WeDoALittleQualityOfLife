@@ -240,6 +240,7 @@ namespace WeDoALittleQualityOfLife.Content.Recipes
             .AddIngredient(ItemID.LifeCrystal, 1)
             .AddTile(TileID.ShimmerMonolith)
             .AddCondition(Condition.DownedMechBossAny)
+            .AddCustomShimmerResult(ItemID.LifeFruit, 1)
             .Register();
 
             Recipe WDALT_WormScarf_BoC_V1 = Recipe.Create(ItemID.WormScarf, 1);
